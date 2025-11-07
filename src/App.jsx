@@ -16,25 +16,35 @@ export default function FormularioSimples() {
     habilidadeEspecial: "",
     poderEspecial: "",
     time: "",
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
   });
 
-  // Atualiza o campo quando o usuário digita
   function handleChange(event) {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   }
 
-  // Mostra os dados no console ao enviar
   function handleSubmit(event) {
     event.preventDefault();
     console.log("Dados do formulário:", form);
     alert("Formulário enviado! Veja no console (F12).");
   }
 
+  
+
+const enviarForms=(e)=>{
+  e.preventDefault()
+  console.log('Email: ${email}, Senha: ${senha}')
+}
+
   return (
     <div style={{ padding: "20px" }}>
       <h2>Formulário</h2>
       <form onSubmit={handleSubmit}>
+
+        
+
         <label>
           Nome:
           <input
