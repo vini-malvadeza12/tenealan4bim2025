@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function FormularioSimples() {
   const [form, setForm] = useState({
@@ -16,8 +16,6 @@ export default function FormularioSimples() {
     habilidadeEspecial: "",
     poderEspecial: "",
     time: "",
-    const [email, setEmail] = useState('')
-    const [senha, setSenha] = useState('')
   });
 
   function handleChange(event) {
@@ -31,20 +29,26 @@ export default function FormularioSimples() {
     alert("Formulário enviado! Veja no console (F12).");
   }
 
-  
+  const enviarForms=(e)=>{
+    e.preventDefault()
+    fetch('URL',{
+      method: 'POST',
+      body:JSON.stringfy()
+    })
+    console.log('Email: ${email}, senha: ${password}')
+  }
 
-const enviarForms=(e)=>{
-  e.preventDefault()
-  console.log('Email: ${email}, Senha: ${senha}')
-}
+useEffect(() => {
+  fetch("https://www.api.alanleiser.com/")
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(error => console.log('error'))
+})
 
   return (
     <div style={{ padding: "20px" }}>
       <h2>Formulário</h2>
       <form onSubmit={handleSubmit}>
-
-        
-
         <label>
           Nome:
           <input
@@ -198,6 +202,8 @@ const enviarForms=(e)=>{
           />
         </label>
         <br /><br />
+
+        
 
         <button type="submit">Enviar</button>
       </form>
