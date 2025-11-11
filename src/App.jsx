@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-export default function FormularioSimples() {
-  const [form, setForm] = useState({
+export default function Formulario() {
+  const [formData, setFormData] = useState({
     nome: "",
     idade: "",
     telefone: "",
@@ -18,194 +18,113 @@ export default function FormularioSimples() {
     time: "",
   });
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setForm({ ...form, [name]: value });
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log("Dados do formulário:", form);
-    alert("Formulário enviado! Veja no console (F12).");
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Dados enviados:", formData);
+    alert("Informações enviadas com sucesso!");
+  };
 
-  const enviarForms=(e)=>{
-    e.preventDefault()
-    fetch('URL',{
-      method: 'POST',
-      body:JSON.stringfy()
-    })
-    console.log('Email: ${email}, senha: ${password}')
-  }
-
-useEffect(() => {
-  fetch("https://www.api.alanleiser.com/")
-  .then(res => res.json())
-  .then(data => console.log(data))
-  .catch(error => console.log('error'))
-})
+  const styles = {
+    container: {
+      maxWidth: "600px",
+      margin: "40px auto",
+      padding: "30px",
+      backgroundColor: "#f9f9f9",
+      borderRadius: "12px",
+      boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+      fontFamily: "Arial, sans-serif",
+    },
+    title: {
+      textAlign: "center",
+      color: "#333",
+      marginBottom: "20px",
+    },
+    label: {
+      display: "block",
+      marginTop: "10px",
+      fontWeight: "bold",
+      color: "#555",
+    },
+    input: {
+      width: "100%",
+      padding: "10px",
+      marginTop: "5px",
+      borderRadius: "8px",
+      border: "1px solid #ccc",
+      fontSize: "15px",
+      transition: "0.2s",
+    },
+    inputFocus: {
+      borderColor: "#4a90e2",
+    },
+    button: {
+      marginTop: "20px",
+      padding: "12px 20px",
+      backgroundColor: "#4a90e2",
+      color: "#fff",
+      fontSize: "16px",
+      border: "none",
+      borderRadius: "8px",
+      cursor: "pointer",
+      width: "100%",
+      transition: "0.3s",
+    },
+    buttonHover: {
+      backgroundColor: "#357ABD",
+    },
+  };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Formulário</h2>
+    <div style={styles.container}>
+      <h2 style={styles.title}>📋 Formulário de Informações</h2>
+
       <form onSubmit={handleSubmit}>
-        <label>
-          Nome:
-          <input
-            name="nome"
-            placeholder="Digite seu nome"
-            value={form.nome}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
+        {[
+          ["nome", "Nome", "Digite seu nome"],
+          ["idade", "Idade", "Digite sua idade"],
+          ["telefone", "Telefone", "Digite seu telefone"],
+          ["instagram", "Instagram", "@seuusuario"],
+          ["github", "GitHub", "Link do seu GitHub"],
+          ["pensamento", "Pensamento", "Um pensamento do dia"],
+          ["probleminha", "Probleminha", "Conte um probleminha"],
+          ["ultimaSerie", "Última série assistida", "Nome da série"],
+          ["ultimoJogo", "Último jogo jogado", "Nome do jogo"],
+          ["musica", "Música favorita", "Nome da música"],
+          ["genero", "Gênero musical favorito", "Ex: Rock, Pop, Rap..."],
+          ["habilidadeEspecial", "Habilidade especial", "Sua habilidade"],
+          ["poderEspecial", "Poder especial", "Seu poder especial"],
+          ["time", "Time que torce", "Digite o nome do seu time"],
+        ].map(([key, label, placeholder]) => (
+          <div key={key}>
+            <label style={styles.label}>{label}:</label>
+            <input
+              type="text"
+              name={key}
+              placeholder={placeholder}
+              value={formData[key]}
+              onChange={handleChange}
+              style={styles.input}
+            />
+          </div>
+        ))}
 
-        <label>
-          Idade:
-          <input
-            name="idade"
-            placeholder="Digite sua idade"
-            value={form.idade}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          Telefone:
-          <input
-            name="telefone"
-            placeholder="Digite seu telefone"
-            value={form.telefone}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          Instagram:
-          <input
-            name="instagram"
-            placeholder="Digite seu Instagram"
-            value={form.instagram}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          GitHub:
-          <input
-            name="github"
-            placeholder="Digite seu GitHub"
-            value={form.github}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          Pensamento:
-          <input
-            name="pensamento"
-            placeholder="Digite um pensamento"
-            value={form.pensamento}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          Probleminha:
-          <input
-            name="probleminha"
-            placeholder="Um probleminha que resolveu"
-            value={form.probleminha}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          Última série:
-          <input
-            name="ultimaSerie"
-            placeholder="Última série assistida"
-            value={form.ultimaSerie}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          Último jogo:
-          <input
-            name="ultimoJogo"
-            placeholder="Último jogo jogado"
-            value={form.ultimoJogo}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          Música:
-          <input
-            name="musica"
-            placeholder="Música favorita"
-            value={form.musica}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          Gênero:
-          <input
-            name="genero"
-            placeholder="Gênero favorito"
-            value={form.genero}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          Habilidade especial:
-          <input
-            name="habilidadeEspecial"
-            placeholder="Sua habilidade especial"
-            value={form.habilidadeEspecial}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          Poder especial:
-          <input
-            name="poderEspecial"
-            placeholder="Seu poder especial"
-            value={form.poderEspecial}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        <label>
-          Time que torce:
-          <input
-            name="time"
-            placeholder="Seu time"
-            value={form.time}
-            onChange={handleChange}
-          />
-        </label>
-        <br /><br />
-
-        
-
-        <button type="submit">Enviar</button>
+        <button
+          type="submit"
+          style={styles.button}
+          onMouseOver={(e) =>
+            (e.target.style.backgroundColor = styles.buttonHover.backgroundColor)
+          }
+          onMouseOut={(e) =>
+            (e.target.style.backgroundColor = styles.button.backgroundColor)
+          }
+        >
+          Enviar informações
+        </button>
       </form>
     </div>
   );
