@@ -16,6 +16,9 @@ export default function Formulario() {
     habilidadeEspecial: "",
     poderEspecial: "",
     time: "",
+    versiculoBiblia: "",
+    email: "",
+    senha: "",
   });
 
   const handleChange = (e) => {
@@ -25,6 +28,7 @@ export default function Formulario() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    fetch('https://api.alanleiser.com/user')
     console.log("Dados enviados:", formData);
     alert("Informações enviadas com sucesso!");
   };
@@ -81,7 +85,7 @@ export default function Formulario() {
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.title}>📋 Formulário de Informações</h2>
+      <h2 style={styles.title}>Formulário de Informações</h2>
 
       <form onSubmit={handleSubmit}>
         {[
@@ -99,6 +103,9 @@ export default function Formulario() {
           ["habilidadeEspecial", "Habilidade especial", "Sua habilidade"],
           ["poderEspecial", "Poder especial", "Seu poder especial"],
           ["time", "Time que torce", "Digite o nome do seu time"],
+           ["versiculoBiblia", "Versiculo da Biblia", "Versiculo favorito"],
+          ["email", "Email", "Digite o seu email"],
+          ["senha", "Senha", "Digite a sua senha"],
         ].map(([key, label, placeholder]) => (
           <div key={key}>
             <label style={styles.label}>{label}:</label>

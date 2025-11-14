@@ -16,6 +16,9 @@ export default function Formulario() {
     habilidadeEspecial: "",
     poderEspecial: "",
     time: "",
+    versiculoBiblia: "",
+    email: "",
+    senha: "",
   });
 
   const handleChange = (e) => {
@@ -99,6 +102,9 @@ export default function Formulario() {
           ["habilidadeEspecial", "Habilidade especial", "Sua habilidade"],
           ["poderEspecial", "Poder especial", "Seu poder especial"],
           ["time", "Time que torce", "Digite o nome do seu time"],
+          ["versiculoBiblia", "Versiculo da Biblia", "Digite o seu versiculo favorito"],
+          ["email", "Email", "Digite o seu email"],
+          ["senha", "Senha", "Digite a sua senha"],
         ].map(([key, label, placeholder]) => (
           <div key={key}>
             <label style={styles.label}>{label}:</label>
